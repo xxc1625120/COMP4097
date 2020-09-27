@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
 //            )
 //        )
       val appBarConfiguration = AppBarConfiguration(setOf(
-        R.id.navigation_home, R.id.navigation_dashboard,
-        R.id.navigation_notifications, R.id.mapsFragment))
+        R.id.newsListFragment, R.id.mapsFragment,
+        R.id.infoFragment, R.id.eventsFragment))
 
 
 
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         return true
       }
 
-      fun buttonClick(view : View) {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_home_to_infoFragment)
-      }
+//      fun buttonClick(view : View) {
+//        findNavController(R.id.nav_host_fragment).navigate(R.id.action_navigation_home_to_infoFragment)
+//      }
 }
