@@ -13,12 +13,11 @@
   <fragment
     android:id="@+id/infoFragment"
     android:name="edu.hkbu.comp.comp4097.infoday.InfoFragment"
-    android:label="@string/title_info"
-    tools:layout="@layout/fragment_info" />
+    android:label="@string/title_info" />
   <fragment
     android:id="@+id/newsListFragment"
     android:name="edu.hkbu.comp.comp4097.infoday.ui.news.NewsListFragment"
-    android:label="@string/titile_news "
+    android:label="@string/titile_news"
     tools:layout="@layout/fragment_news_list" />
   <fragment
     android:id="@+id/eventsFragment"
