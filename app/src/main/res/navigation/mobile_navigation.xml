@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_maps" />
   <fragment
     android:id="@+id/infoFragment"
-    android:name="edu.hkbu.comp.comp4097.infoday.InfoFragment"
+    android:name="edu.hkbu.comp.comp4097.infoday.ui.info.InfoFragment"
     android:label="@string/title_info" />
   <fragment
     android:id="@+id/newsListFragment"
