@@ -1,5 +1,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
+  <PreferenceCategory app:layout="@layout/layout_info">
+
+  </PreferenceCategory>
+  <PreferenceCategory
+    android:title="Important Numbers">
+    <Preference app:layout="@layout/layout_important_numbers"></Preference>
+  </PreferenceCategory>
   <PreferenceCategory app:title="Settings">
     <SwitchPreferenceCompat
       android:id="@+id/setting_dark_mode"
