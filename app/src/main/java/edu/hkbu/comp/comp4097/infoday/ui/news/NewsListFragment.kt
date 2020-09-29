@@ -9,7 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import edu.hkbu.comp.comp4097.infoday.R
-import edu.hkbu.comp.comp4097.infoday.ui.news.dummy.DummyContent
+import edu.hkbu.comp.comp4097.infoday.data.News
+
 
 /**
  * A fragment representing a list of Items.
@@ -39,7 +40,15 @@ class NewsListFragment : Fragment() {
           columnCount <= 1 -> LinearLayoutManager(context)
           else -> GridLayoutManager(context, columnCount)
         }
-        adapter = NewsRecyclerViewAdapter(DummyContent.ITEMS)
+//        adapter = NewsRecyclerViewAdapter(DummyContent.ITEMS)
+        // adapter = NewsRecyclerViewAdapter(DummyContent.ITEMS) //change this one
+        val newsImage = resources.getStringArray(R.array.newsImage)
+        val newsTitle = resources.getStringArray(R.array.newsTitle)
+        val newsDetail = resources.getStringArray(R.array.newsDetail)
+        val news = mutableListOf<News>()
+        for (i in 0..(newsDetail.size - 1))
+          news.add(News(newsImage[i], newsTitle[i], newsDetail[i]))
+        adapter = NewsRecyclerViewAdapter(news)
       }
     }
     return view
