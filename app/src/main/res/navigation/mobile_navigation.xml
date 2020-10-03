@@ -23,5 +23,9 @@
     android:id="@+id/eventsFragment"
     android:name="edu.hkbu.comp.comp4097.infoday.ui.events.EventsFragment"
     android:label="@string/title_events"
-    tools:layout="@layout/fragment_event_list" />
+    tools:layout="@layout/fragment_event_list" >
+    <action
+      android:id="@+id/action_eventsFragment_self"
+      app:destination="@id/eventsFragment" />
+  </fragment>
 </navigation>

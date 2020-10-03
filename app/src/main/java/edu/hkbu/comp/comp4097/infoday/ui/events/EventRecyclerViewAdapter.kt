@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import edu.hkbu.comp.comp4097.infoday.R
+import edu.hkbu.comp.comp4097.infoday.data.Event
 
-import edu.hkbu.comp.comp4097.infoday.ui.events.dummy.DummyContent.DummyItem
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
 class EventRecyclerViewAdapter(
-  private val values: List<DummyItem>
+  private val values: List<Event>
 ) : RecyclerView.Adapter<EventRecyclerViewAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,18 +25,16 @@ class EventRecyclerViewAdapter(
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val item = values[position]
-    holder.idView.text = item.id
-    holder.contentView.text = item.content
+    holder.deptIdView.text = item.deptId + ":" + item.id
+    holder.eventTitleView.text = item.title
   }
 
   override fun getItemCount(): Int = values.size
 
   inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val idView: TextView = view.findViewById(R.id.titleTextView)
-    val contentView: TextView = view.findViewById(R.id.content)
+    val deptIdView: TextView = view.findViewById(R.id.titleTextView)
+    val eventTitleView: TextView = view.findViewById(R.id.content)
 
-    override fun toString(): String {
-      return super.toString() + " '" + contentView.text + "'"
-    }
+
   }
 }

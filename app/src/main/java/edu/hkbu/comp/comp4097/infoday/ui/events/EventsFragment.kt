@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import edu.hkbu.comp.comp4097.infoday.R
-import edu.hkbu.comp.comp4097.infoday.ui.events.dummy.DummyContent
+import edu.hkbu.comp.comp4097.infoday.data.SampleData
 
 /**
  * A fragment representing a list of Items.
@@ -39,7 +40,22 @@ class EventsFragment : Fragment() {
           columnCount <= 1 -> LinearLayoutManager(context)
           else -> GridLayoutManager(context, columnCount)
         }
-        adapter = EventRecyclerViewAdapter(DummyContent.ITEMS)
+        //adapter = EventRecyclerViewAdapter(DummyContent.ITEMS)
+//        adapter = DeptRecyclerViewAdapter(SampleData.DEPT)
+
+        val dept_id = arguments?.getString("dept_id")
+        if (dept_id == null)
+          adapter = DeptRecyclerViewAdapter(SampleData.DEPT)
+        else {
+          adapter = EventRecyclerViewAdapter(SampleData.EVENT.filter { it.deptId == dept_id})
+          //to enable the back-arrow in the ActionBar.
+          (activity as
+            AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+
+
+
+
       }
     }
     return view
