@@ -10,7 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import edu.hkbu.comp.comp4097.infoday.R
+import edu.hkbu.comp.comp4097.infoday.data.AppDatabase
 import edu.hkbu.comp.comp4097.infoday.data.SampleData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * A fragment representing a list of Items.
@@ -47,8 +51,15 @@ class EventsFragment : Fragment() {
         if (dept_id == null)
           adapter = DeptRecyclerViewAdapter(SampleData.DEPT)
         else {
-          adapter = EventRecyclerViewAdapter(SampleData.EVENT.filter { it.deptId == dept_id})
+//          adapter = EventRecyclerViewAdapter(SampleData.EVENT.filter { it.deptId == dept_id})
           //to enable the back-arrow in the ActionBar.
+          CoroutineScope(Dispatchers.IO).launch {
+            val dao = AppDatabase.getInstance(context).eventDao()
+            val events = dao.findEventsByDeptID(dept_id)
+            CoroutineScope(Dispatchers.Main).launch {
+              adapter = EventRecyclerViewAdapter(events)
+            }
+          }
           (activity as
             AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
