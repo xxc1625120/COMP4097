@@ -28,4 +28,9 @@
       android:id="@+id/action_eventsFragment_self"
       app:destination="@id/eventsFragment" />
   </fragment>
+  <fragment
+    android:id="@+id/bookmarkFragment"
+    android:name="edu.hkbu.comp.comp4097.infoday.ui.events.BookmarkFragment"
+    android:label="Bookmark"
+    tools:layout="@layout/fragment_bookmark_list" />
 </navigation>
