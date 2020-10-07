@@ -31,7 +31,10 @@ class NewsRecyclerViewAdapter(
 //    holder.contentView.text = item.content
     holder.titleTextView.text = item.title
     holder.detailTextView.text = item.detail
-    Picasso.get().load(item.image).into(holder.newsImageView)
+    if (item.image != "")
+      Picasso.get().load(item.image).into(holder.newsImageView)
+    else
+      holder.newsImageView.setImageDrawable(holder.itemView.context.getDrawable(R.drawable.ic_baseline_cloud_download_24))
 
 
   }

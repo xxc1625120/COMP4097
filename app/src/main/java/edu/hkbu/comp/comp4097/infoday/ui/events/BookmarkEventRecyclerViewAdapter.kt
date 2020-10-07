@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.android.material.snackbar.Snackbar
 import edu.hkbu.comp.comp4097.infoday.R
 import edu.hkbu.comp.comp4097.infoday.data.AppDatabase
 import edu.hkbu.comp.comp4097.infoday.data.Event
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 /**
@@ -19,7 +18,7 @@ import kotlinx.coroutines.launch
  * TODO: Replace the implementation with code for your data type.
  */
 class BookmarkEventRecyclerViewAdapter(
-  private val values: List<Event>
+  private val values: MutableList<Event>
 ) : RecyclerView.Adapter<BookmarkEventRecyclerViewAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,11 +53,25 @@ class BookmarkEventRecyclerViewAdapter(
       //assume your idView contains deptID and contentView contains event's title
       val unbookmarkItem = values.find { it.deptId+ ":" + it.id == holder.deptIdView.text}
       unbookmarkItem?.bookmarked = false
-      if (unbookmarkItem != null)
-        CoroutineScope(Dispatchers.IO).launch {
-          AppDatabase.getInstance(viewHolder.itemView.context).
-          eventDao().update(unbookmarkItem)
+      if (unbookmarkItem != null) {
+        val job = CoroutineScope(Dispatchers.IO).launch {
+          delay(3000L)
+          if (isActive) {
+            unbookmarkItem.bookmarked = false
+            AppDatabase.getInstance(viewHolder.itemView.context).eventDao()
+              .update(unbookmarkItem)
+            values.remove(unbookmarkItem)
+            CoroutineScope(Dispatchers.Main).launch {
+              notifyDataSetChanged()
+            }
+          }
         }
+        Snackbar.make(viewHolder.itemView, "The bookmark is deleted",
+          Snackbar.LENGTH_LONG).setAction("Undo") {
+          job.cancel()
+          notifyDataSetChanged()
+        }.show()
+      }
     }
   }
 
